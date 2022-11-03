@@ -1,0 +1,8 @@
+#This is the Chart-file for the Argocd-Helmchart 
+apiVersion: v2
+name: argocd-helmchart
+description: A Helm chart for Argo Cd project
+type: application
+version: 0.0.1
+appVersion: 1.0.0
+icon: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png

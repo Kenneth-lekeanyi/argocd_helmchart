@@ -1,0 +1,17 @@
+# This is the service definition or service manifest file to expose the App
+apiVersion: v1
+kind: service
+metadata: 
+  name: argocd-service
+  labels:
+    app: node.js
+    image: {{ .Values.image.name }}
+  namespace: argo-cd
+Spec: 
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: node.js
+    type: {{ .Values.service.type }}

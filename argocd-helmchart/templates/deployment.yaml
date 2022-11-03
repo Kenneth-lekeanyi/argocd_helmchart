@@ -1,0 +1,32 @@
+# This is the Application manifest file to be deployed to Argo-CD in openShift
+apiVersion: argocd/v1
+kind: Deployment
+metadata:
+  labels:
+    app: node.js
+  name: myapp
+Spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+    app: node.js
+  source:
+    helm:
+    parameters:
+      - name: build.enable
+        value: "false"
+      - name: deploy.route. tls.enabled
+        value: "false"
+      - name: image.name
+        value: {{ .Values.image.name }}
+    Chart: argocd-helmchart
+  destination:
+    namespace: argo-cd
+    cluster URL: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: "true"
+      selfHeal: "true"
+    syncOptions:
+    - createNamespace = "true"
